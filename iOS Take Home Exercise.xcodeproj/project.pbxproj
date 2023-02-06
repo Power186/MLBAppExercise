@@ -36,6 +36,8 @@
 		D2A0D49F2987DDF600CF9ABF /* LineScoreTeams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0D49E2987DDF600CF9ABF /* LineScoreTeams.swift */; };
 		D2A0D4A12987DE1800CF9ABF /* LineScoreHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0D4A02987DE1800CF9ABF /* LineScoreHome.swift */; };
 		D2A0D4A32987DE2F00CF9ABF /* LineScoreAway.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A0D4A22987DE2F00CF9ABF /* LineScoreAway.swift */; };
+		D2B2892E2990FF1A00DE6245 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2892D2990FF1A00DE6245 /* Date+Ext.swift */; };
+		D2B289312990FF9700DE6245 /* GameDateHeaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B289302990FF9700DE6245 /* GameDateHeaderDelegate.swift */; };
 		D2B557AC29883DE4002FC3B7 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B557AB29883DE4002FC3B7 /* JSONTests.swift */; };
 		D2B557AE29883E44002FC3B7 /* JSONResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B557AD29883E43002FC3B7 /* JSONResponse.swift */; };
 		D2B557B029884994002FC3B7 /* GamesStatusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B557AF29884994002FC3B7 /* GamesStatusTests.swift */; };
@@ -96,6 +98,8 @@
 		D2A0D49E2987DDF600CF9ABF /* LineScoreTeams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineScoreTeams.swift; sourceTree = "<group>"; };
 		D2A0D4A02987DE1800CF9ABF /* LineScoreHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineScoreHome.swift; sourceTree = "<group>"; };
 		D2A0D4A22987DE2F00CF9ABF /* LineScoreAway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineScoreAway.swift; sourceTree = "<group>"; };
+		D2B2892D2990FF1A00DE6245 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		D2B289302990FF9700DE6245 /* GameDateHeaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDateHeaderDelegate.swift; sourceTree = "<group>"; };
 		D2B557AB29883DE4002FC3B7 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
 		D2B557AD29883E43002FC3B7 /* JSONResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONResponse.swift; sourceTree = "<group>"; };
 		D2B557AF29884994002FC3B7 /* GamesStatusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesStatusTests.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 		1C2C34C621FB50A600482E87 /* iOS Take Home Exercise */ = {
 			isa = PBXGroup;
 			children = (
+				D2B2892F2990FF7C00DE6245 /* Protocols */,
 				D2B557A729883C2B002FC3B7 /* Extensions */,
 				D22F3BF02984DC5B00B3C426 /* Views */,
 				D22F3BEF2984DC5200B3C426 /* ViewModels */,
@@ -219,10 +224,19 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		D2B2892F2990FF7C00DE6245 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D2B289302990FF9700DE6245 /* GameDateHeaderDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		D2B557A729883C2B002FC3B7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				D2A0D49029878ECB00CF9ABF /* String+Ext.swift */,
+				D2B2892D2990FF1A00DE6245 /* Date+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -411,6 +425,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B2892E2990FF1A00DE6245 /* Date+Ext.swift in Sources */,
 				D22F3BF52984E56B00B3C426 /* GamesResponse.swift in Sources */,
 				D2A0D4972987B56700CF9ABF /* Venue.swift in Sources */,
 				D226D539298537BD008D8A3E /* HomeTeam.swift in Sources */,
@@ -429,6 +444,7 @@
 				D2A0D4992987B8A100CF9ABF /* Location.swift in Sources */,
 				D2A0D49329879EF700CF9ABF /* Linescore.swift in Sources */,
 				D22F3BF92984ECDB00B3C426 /* GamesViewModel.swift in Sources */,
+				D2B289312990FF9700DE6245 /* GameDateHeaderDelegate.swift in Sources */,
 				D226D52B29852E54008D8A3E /* GamesTableViewController.swift in Sources */,
 				D2DFC7CA29866B6A007406E8 /* TabBarViewController.swift in Sources */,
 				1C2C34C821FB50A600482E87 /* AppDelegate.swift in Sources */,

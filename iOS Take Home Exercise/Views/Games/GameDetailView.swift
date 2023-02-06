@@ -8,15 +8,15 @@ struct GameDetailView: View {
     let games: Games
     
     private var coordinateRegion: MKCoordinateRegion {
-        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: games.venue.location.defaultCoordinates.latitude,
-                                                          longitude: games.venue.location.defaultCoordinates.longitude),
+        MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: games.venue?.location?.defaultCoordinates?.latitude ?? 0.0,
+                                                          longitude: games.venue?.location?.defaultCoordinates?.longitude ?? 0.0),
                            span: MKCoordinateSpan(latitudeDelta: 0.3,
                                                 longitudeDelta: 0.3))
     }
     
     private var annotations: [Location] {
-        [Location(coordinate: CLLocationCoordinate2D(latitude: games.venue.location.defaultCoordinates.latitude,
-                                                     longitude: games.venue.location.defaultCoordinates.longitude))]
+        [Location(coordinate: CLLocationCoordinate2D(latitude: games.venue?.location?.defaultCoordinates?.latitude ?? 0.0,
+                                                     longitude: games.venue?.location?.defaultCoordinates?.longitude ?? 0.0))]
     }
     
     // MARK: - Initialization
@@ -60,10 +60,10 @@ extension GameDetailView {
     
     @ViewBuilder
     private func locationLabels() -> some View {
-        Text(games.venue.name + " - ")
+        Text((games.venue?.name ?? "") + " - ")
             .font(.callout)
             .fontWeight(.semibold) +
-        Text(games.venue.location.city + " " + games.venue.location.stateAbbrev)
+        Text((games.venue?.location?.city ?? "") + " " + (games.venue?.location?.stateAbbrev ?? ""))
             .font(.callout)
     }
     
@@ -82,23 +82,23 @@ extension GameDetailView {
             }
             Spacer()
             VStack(alignment: .center, spacing: 8) {
-                Text(games.teams.away.team.name)
+                Text(games.teams?.away?.team?.name ?? "")
                     .font(.headline)
                     .foregroundColor(.blue)
-                Text("\(games.linescore.teams.away.runs)")
-                Text("\(games.linescore.teams.away.hits)")
-                Text("\(games.linescore.teams.away.errors)")
-                Text("\(games.linescore.teams.away.leftOnBase)")
+                Text("\(games.linescore?.teams?.away?.runs ?? 0)")
+                Text("\(games.linescore?.teams?.away?.hits ?? 0)")
+                Text("\(games.linescore?.teams?.away?.errors ?? 0)")
+                Text("\(games.linescore?.teams?.away?.leftOnBase ?? 0)")
             }
             Spacer()
             VStack(alignment: .center, spacing: 8) {
-                Text(games.teams.home.team.name)
+                Text(games.teams?.home?.team?.name ?? "")
                     .font(.headline)
                     .foregroundColor(.red)
-                Text("\(games.linescore.teams.home.runs)")
-                Text("\(games.linescore.teams.home.hits)")
-                Text("\(games.linescore.teams.home.errors)")
-                Text("\(games.linescore.teams.home.leftOnBase)")
+                Text("\(games.linescore?.teams?.home?.runs ?? 0)")
+                Text("\(games.linescore?.teams?.home?.hits ?? 0)")
+                Text("\(games.linescore?.teams?.home?.errors ?? 0)")
+                Text("\(games.linescore?.teams?.home?.leftOnBase ?? 0)")
             }
             Spacer()
         }

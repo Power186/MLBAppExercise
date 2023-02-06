@@ -29,14 +29,14 @@ class GamesTableViewCell: UITableViewCell {
     // MARK: - Public Methods
     
     func set(_ games: Games) {
-        awayTeamLabel.text = games.teams.away.team.teamName
-        awayRecordLabel.text = "\(games.teams.away.leagueRecord.wins)-\(games.teams.away.leagueRecord.losses)"
+        awayTeamLabel.text = games.teams?.away?.team?.teamName
+        awayRecordLabel.text = "\(games.teams?.away?.leagueRecord?.wins ?? 0)-\(games.teams?.away?.leagueRecord?.losses ?? 0)"
         
-        homeTeamLabel.text = games.teams.home.team.teamName
-        homeRecordLabel.text = "\(games.teams.home.leagueRecord.wins)-\(games.teams.home.leagueRecord.losses)"
+        homeTeamLabel.text = games.teams?.home?.team?.teamName
+        homeRecordLabel.text = "\(games.teams?.home?.leagueRecord?.wins ?? 0)-\(games.teams?.home?.leagueRecord?.losses ?? 0)"
         
-        awayScoreLabel.text = "\(games.teams.away.score)"
-        homeScoreLabel.text = "\(games.teams.home.score)"
+        awayScoreLabel.text = "\(games.teams?.away?.score ?? 0)"
+        homeScoreLabel.text = "\(games.teams?.home?.score ?? 0)"
         
         gameStatusLabel.text = games.setGameStatus()
     }

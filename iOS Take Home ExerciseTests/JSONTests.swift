@@ -48,22 +48,22 @@ final class JSONTests: XCTestCase {
                                                from: jsonResponse.gamesModels)
         XCTAssertNoThrow(decoded, "Games json models should not throw decoding errors")
         
-        decoded.dates.forEach {
+        decoded.dates?.forEach {
             XCTAssertEqual($0.date, "2018-09-19")
-            $0.games.forEach {
-                XCTAssertEqual($0.status.detailedState, "Final")
-                XCTAssertEqual($0.linescore.currentInning, 9)
-                XCTAssertEqual($0.linescore.scheduledInnings, 9)
+            $0.games?.forEach {
+                XCTAssertEqual($0.status?.detailedState, "Final")
+                XCTAssertEqual($0.linescore?.currentInning, 9)
+                XCTAssertEqual($0.linescore?.scheduledInnings, 9)
                 
-                awayTeamNames.append($0.teams.away.team.teamName)
-                homeTeamsNames.append($0.teams.home.team.teamName)
-                homeTeamScores.append($0.teams.home.score)
-                awayTeamScores.append($0.teams.away.score)
-                awayTeamLeagueRecWins.append($0.teams.away.leagueRecord.wins)
-                awayTeamLeagueRecLosses.append($0.teams.away.leagueRecord.losses)
-                venueNames.append($0.venue.name)
-                locationCities.append( $0.venue.location.city)
-                awayTeamRuns.append($0.linescore.teams.away.runs)
+                awayTeamNames.append($0.teams?.away?.team?.teamName ?? "")
+                homeTeamsNames.append($0.teams?.home?.team?.teamName ?? "")
+                homeTeamScores.append($0.teams?.home?.score ?? 0)
+                awayTeamScores.append($0.teams?.away?.score ?? 0)
+                awayTeamLeagueRecWins.append($0.teams?.away?.leagueRecord?.wins ?? 0)
+                awayTeamLeagueRecLosses.append($0.teams?.away?.leagueRecord?.losses ?? 0)
+                venueNames.append($0.venue?.name ?? "")
+                locationCities.append( $0.venue?.location?.city ?? "")
+                awayTeamRuns.append($0.linescore?.teams?.away?.runs ?? 0)
             }
         }
         

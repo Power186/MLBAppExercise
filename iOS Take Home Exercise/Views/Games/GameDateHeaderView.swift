@@ -4,6 +4,10 @@ class GameDateHeaderView: UIView {
     
     // MARK: - Properties
     
+    weak var delegate: GameDateHeaderDelegate?
+    private var selectedDate: String = ""
+    private var dateValue: Int = 0
+    
     private let dateLabel = UILabel()
     private let nextIndicatorImageView = UIImageView()
     private let backIndicatorImageView = UIImageView()
@@ -21,7 +25,7 @@ class GameDateHeaderView: UIView {
     
     init(date: String) {
         super.init(frame: .zero)
-        dateLabel.text = date
+        selectedDate = date
         configureView()
     }
     
@@ -43,14 +47,23 @@ class GameDateHeaderView: UIView {
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.adjustsFontForContentSizeCategory = true
         dateLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        dateLabel.text = selectedDate
         
         nextIndicatorImageView.translatesAutoresizingMaskIntoConstraints = false
         nextIndicatorImageView.image = UIImage(systemName: "chevron.right")
         nextIndicatorImageView.tintColor = .systemGray
+        nextIndicatorImageView.isUserInteractionEnabled = true
+        let next = UITapGestureRecognizer(target: self,
+                                       action: #selector(nextTapped))
+        nextIndicatorImageView.addGestureRecognizer(next)
         
         backIndicatorImageView.translatesAutoresizingMaskIntoConstraints = false
         backIndicatorImageView.image = UIImage(systemName: "chevron.left")
         backIndicatorImageView.tintColor = .systemGray
+        backIndicatorImageView.isUserInteractionEnabled = true
+        let back = UITapGestureRecognizer(target: self,
+                                          action: #selector(backTapped))
+        backIndicatorImageView.addGestureRecognizer(back)
     }
     
     // Constraints
@@ -68,4 +81,38 @@ class GameDateHeaderView: UIView {
         ])
     }
 
+}
+
+// MARK: - Helper Methods
+
+extension GameDateHeaderView {
+    
+    @objc private func nextTapped() {
+        dateValue += 1
+        setSelectedDate()
+    }
+    
+    @objc private  func backTapped() {
+        dateValue -= 1
+        setSelectedDate()
+    }
+    
+    private func setSelectedDate() {
+        // convert this to a date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.date(from: selectedDate.formatToGameServerDate()) ?? Date()
+
+        // pass in updated dateValue
+        let newDate = date.mutate(by: dateValue)
+        
+        // convert newDate to string
+        let secondFormatter = DateFormatter()
+        secondFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let string = secondFormatter.string(from: newDate)
+        
+        // send selected date
+        delegate?.updatedDate(string.formatMutatedGameDate())
+    }
+    
 }

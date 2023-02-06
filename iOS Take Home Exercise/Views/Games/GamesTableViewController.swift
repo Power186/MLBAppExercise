@@ -40,6 +40,7 @@ class GamesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let dateView = GameDateHeaderView(date: gamesVM.gamesDate)
+        dateView.delegate = self
         return dateView
     }
     
@@ -66,10 +67,25 @@ class GamesTableViewController: UITableViewController {
     }
     
     private func getGames() {
-        gamesVM.getGames { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
+        if gamesVM.isGamesEmptyViewShowing {
+            gamesVM.games = []
+        } else {
+            gamesVM.getGames { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+            }
         }
     }
 
+}
+
+// MARK: - Extensions: Protocols
+
+extension GamesTableViewController: GameDateHeaderDelegate {
+    
+    func updatedDate(_ date: String) {
+        gamesVM.gamesDate = date
+        getGames()
+    }
+    
 }

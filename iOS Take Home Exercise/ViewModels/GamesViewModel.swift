@@ -5,15 +5,16 @@ final class GamesViewModel {
     
     // MARK: - Properties
     
-    var gamesDate: String = String()
+    var gamesDate: String = "2018-09-19"
     var games: [Games] = []
+    var isGamesEmptyViewShowing: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Methods
     
     func getGames(completion: @escaping () -> Void) {
-        guard let url = URL(string: "https://statsapi.mlb.com/api/v1/schedule?hydrate=team(league),venue(location,timezone),linescore&date=2018-09-19&sportId=1,51&language=en") else {
+        guard let url = URL(string: "https://statsapi.mlb.com/api/v1/schedule?hydrate=team(league),venue(location,timezone),linescore&date=\(gamesDate)&sportId=1,51&language=en") else {
             debugPrint("\(URLError.badURL)")
             return
         }
@@ -33,9 +34,15 @@ final class GamesViewModel {
                 }
             } receiveValue: { [weak self] in
                 guard let self = self else { return }
-                $0.dates.forEach {
-                    self.gamesDate = $0.date.formatToGameDate()
-                    self.games = $0.games.sorted()
+                guard $0.dates != nil else {
+                    self.isGamesEmptyViewShowing = true
+                    return
+                }
+                
+                self.isGamesEmptyViewShowing = false
+                $0.dates?.forEach {
+                    self.gamesDate = $0.date?.formatToGameDate() ?? ""
+                    self.games = $0.games?.sorted() ?? []
                 }
             }
             .store(in: &cancellables)
